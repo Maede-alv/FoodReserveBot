@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: food-reserve-bot
+
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/food_reserve_bot}
+    username: ${DB_USERNAME:test}
+    password: ${DB_PASSWORD:test}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+
+  bot:
+    token: ${TELEGRAM_BOT_TOKEN:token}
+    username: ${TELEGRAM_BOT_USERNAME:food_reserve_test_bot}
+
+  security:
+    user:
+      name: ${ADMIN_USERNAME:admin}
+      password: ${ADMIN_PASSWORD:admin}
+
+  messages:
+    basename: messages
+    encoding: UTF-8

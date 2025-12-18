@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "1b4ba6cf-95eb-49e3-84f6-c93d0780650e",
+		"name": "Food Reserve Bot - Admin APIs",
+		"description": "Collection for admin endpoints of the Spring Boot Telegram Food Reservation Bot.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Foods",
+			"item": [
+				{
+					"name": "Create Food",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"قورمه سبزی\",\n  \"description\": \"غذای سنتی ایرانی\",\n  \"price\": 150000,\n  \"available\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/foods",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"foods"
+							]
+						},
+						"description": "Create a new food item"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Foods",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/foods",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"foods"
+							]
+						},
+						"description": "Retrieve all foods"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Food by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/foods/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"foods",
+								"1"
+							]
+						},
+						"description": "Get a single food by ID (replace 1 with actual ID)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Food",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"قورمه سبزی ویژه\",\n  \"price\": 180000,\n  \"available\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/foods/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"foods",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Food",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/foods/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"foods",
+								"1"
+							]
+						},
+						"description": "Delete a food by ID (replace 1 with actual ID)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "List All Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/orders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"orders"
+							]
+						},
+						"description": "Get all orders (no filters)"
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Orders by User ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/orders?userId=5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "5",
+									"description": "Replace with actual user internal ID"
+								}
+							]
+						},
+						"description": "Filter orders by user (internal DB ID, not Telegram ID)"
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Orders by Date Range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/orders?from=2025-12-01T00:00:00&to=2025-12-18T23:59:59",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "2025-12-01T00:00:00",
+									"description": "ISO format: YYYY-MM-DDTHH:mm:ss"
+								},
+								{
+									"key": "to",
+									"value": "2025-12-18T23:59:59",
+									"description": "ISO format"
+								}
+							]
+						},
+						"description": "Filter orders between two dates"
+					},
+					"response": []
+				},
+				{
+					"name": "Combined Filters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/orders?userId=1&from=2025-12-10T00:00:00",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								},
+								{
+									"key": "from",
+									"value": "2025-12-10T00:00:00"
+								}
+							]
+						},
+						"description": "Multiple filters combined (user + date from)"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "{{adminUsername}}",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "{{adminPassword}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"description": "Change to your deployed URL if needed"
+		},
+		{
+			"key": "adminPassword",
+			"value": ""
+		},
+		{
+			"key": "adminUsername",
+			"value": ""
+		}
+	]
+}
